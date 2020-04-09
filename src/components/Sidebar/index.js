@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import Carousel from 'react-bootstrap/Carousel'
 
 import api from '../../services/api'
 
 import './styles.css'
+
+import img1 from '../../assets/blue-1.png'
+import img2 from '../../assets/blue-2.png'
+import img3 from '../../assets/blue-3.png'
+import img4 from '../../assets/blue-4.png'
 
 export default function Sidebar() {
     const [incidents, setIncidents] = useState({})
@@ -17,8 +23,22 @@ export default function Sidebar() {
     return (
         <aside className="aside-data data-group" >
             <section className="covid-info">
-                <h1>COVID 19</h1>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda nulla dolore adipisci corrupti fuga aspernatur quod a modi, deserunt sunt pariatur eveniet, illo perferendis expedita praesentium qui dolorem repellendus? Nulla. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, velit minima aperiam exercitationem molestias, beatae quibusdam earum ipsam inventore maxime sequi quisquam vitae dicta commodi dignissimos rerum quia laborum laudantium?</p>
+                <h1>COVID-19</h1>
+        
+            <Carousel indicators={false} keyboard={false} interval={12000}>
+                <Carousel.Item>
+                    <img className="d-block w-100" src={img1} alt="Third slide"/>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img className="d-block w-100" src={img2} alt="Third slide"/>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img className="d-block w-100" src={img3} alt="Third slide"/>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img className="d-block w-100" src={img4} alt="Third slide"/>
+                </Carousel.Item>
+                </Carousel>
             </section>
 
             <div className="total-incidents-data">
@@ -51,16 +71,16 @@ export default function Sidebar() {
                             <button type="button" className="each-country-btn">
                                 <h4>{item.country} {item.province}</h4>
                                 <p>{item.latest.confirmed}</p>
-                            
-                                <div className="country-data-hidden data-country" aria-hidden="false">
-                                    <p>Confirmed: {item.latest.confirmed}</p>
-                                    <p>Deaths: {item.latest.deaths}</p>
-                                    <p>Recoveries: {item.latest.recovered}</p>
-                                </div>
                             </button>
+                            <div className="country-data-hidden" aria-hidden="false">
+                                <p>Confirmed: {item.latest.confirmed}</p>
+                                <p>Deaths: {item.latest.deaths}</p>
+                                <p>Recoveries: {item.latest.recovered}</p>
+                            </div>
                         </>
                     )) : (
                     <div>nao entro em uber celta</div> 
+                    
                 )}
             </div>
         </aside>
