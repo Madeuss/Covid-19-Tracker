@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: ''
+    baseURL: 'https://coronavirus-tracker-api.herokuapp.com/v2/locations'
 })
 
 export default api
