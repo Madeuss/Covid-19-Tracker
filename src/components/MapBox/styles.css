@@ -1,0 +1,6 @@
+#map {
+    width: 65%;
+    height: 100vh;
+    float: right;
+    border: 2px dotted seagreen;
+}
