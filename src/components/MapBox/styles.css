@@ -2,5 +2,6 @@
     width: 65%;
     height: 100vh;
     float: right;
-    border: 2px dotted seagreen;
+    border-bottom: 2px solid rgb(8, 155, 204);
+    border-top: 2px solid rgb(8, 155, 204);
 }

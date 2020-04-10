@@ -50,27 +50,31 @@ export default function Sidebar() {
     return (
         <aside className="aside-data data-group" >
             <section className="covid-info">
-                <h1>COVID-19</h1>
+                <h1>COVID-19 INCIDENTS</h1>
         
-            <Carousel indicators={false} keyboard={false} interval={12000}>
-                <Carousel.Item>
-                    <img className="d-block w-100" src={img1} alt="Third slide"/>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img className="d-block w-100" src={img2} alt="Third slide"/>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img className="d-block w-100" src={img3} alt="Third slide"/>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img className="d-block w-100" src={img4} alt="Third slide"/>
-                </Carousel.Item>
+                <Carousel indicators={false} keyboard={false} interval={12000} className="carousel">
+                    <Carousel.Item>
+                        <img className="d-block w-100" src={img1} alt="Third slide"/>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img className="d-block w-100" src={img2} alt="Third slide"/>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img className="d-block w-100" src={img3} alt="Third slide"/>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img className="d-block w-100" src={img4} alt="Third slide"/>
+                    </Carousel.Item>
                 </Carousel>
             </section>
 
-            <div className="total-incidents-data">
+            <section className="world-incidents">
+                <div className="world-data-title">
+                    <h3>World</h3>
+                </div>
+        
                 { incidents.latest? (
-                <>
+                <div className="total-incidents-data">
                     <button type="button" className="button" id="btn-confirmed">
                     <NumberFormat value={incidents.latest.confirmed} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
                         <p>Confirmed</p>
@@ -84,11 +88,11 @@ export default function Sidebar() {
                         <p>Recoveries</p>
                     </button> 
                         
-                </>
+                </div>
                 ) : (
                 <div></div> 
                 )} 
-            </div>
+            </section>
 
             {/* Country name/province and incidents */}
             <div className="country-incidents-data">
