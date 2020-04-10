@@ -17,10 +17,10 @@ export default function MapBox() {
 
 const getColorFromConfirmedCount = count => {
 	if (count >= 3000){
-		return 'red'
+		return 'rgb(228, 71, 71)'
 	}
 	if (count >= 400 ){
-		return 'blue'
+		return 'rgb(000, 080, 255)'
 	}
 	return 'grey'
 }
@@ -42,6 +42,38 @@ fetch("https://coronavirus-tracker-api.herokuapp.com/v2/locations")
 			.addTo(map);
 		})
 	})
+
+	var canvas = map.getCanvasContainer();
+ 
+	var geojson = {
+		'type': 'FeatureCollection',
+		'features': [{
+			'type': 'Feature',
+			'geometry': {
+				'type': 'Point',
+				'coordinates': [0, 0]
+			}
+		}]
+	};
+
+	map.on('load', function() {
+		// Add a single point to the map
+		map.addSource('point', {
+			'type': 'geojson',
+			'data': geojson
+		});
+		 
+		map.addLayer({
+			'id': 'point',
+			'type': 'circle',
+			'source': 'point',
+			'paint': {
+				'circle-radius': 20,
+				'circle-color': '#6168ff'
+			}
+		});
+	})
+
 
 	return (
 		<div />
