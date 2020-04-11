@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import NumberFormat from 'react-number-format';
 
@@ -11,6 +12,7 @@ import api from '../../services/api'
 
 import './styles.css'
 
+/* WHO ADVICES CAROUSEL IMAGES */
 import img1 from '../../assets/blue-1.png'
 import img2 from '../../assets/blue-2.png'
 import img3 from '../../assets/blue-3.png'

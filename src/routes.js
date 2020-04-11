@@ -9,6 +9,7 @@ export default function Routes() {
             <Switch>
                 <Route path="/" exact component={Main} />
             </Switch>
+
         </BrowserRouter>
     );
 }

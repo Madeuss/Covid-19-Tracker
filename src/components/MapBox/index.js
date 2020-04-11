@@ -43,38 +43,6 @@ fetch("https://coronavirus-tracker-api.herokuapp.com/v2/locations")
 		})
 	})
 
-	var canvas = map.getCanvasContainer();
- 
-	var geojson = {
-		'type': 'FeatureCollection',
-		'features': [{
-			'type': 'Feature',
-			'geometry': {
-				'type': 'Point',
-				'coordinates': [0, 0]
-			}
-		}]
-	};
-
-	map.on('load', function() {
-		// Add a single point to the map
-		map.addSource('point', {
-			'type': 'geojson',
-			'data': geojson
-		});
-		 
-		map.addLayer({
-			'id': 'point',
-			'type': 'circle',
-			'source': 'point',
-			'paint': {
-				'circle-radius': 20,
-				'circle-color': '#6168ff'
-			}
-		});
-	})
-
-
 	return (
 		<div />
 	);
