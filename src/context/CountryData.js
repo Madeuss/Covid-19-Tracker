@@ -9,7 +9,12 @@ export default function CountryProvider({ children }) {
 
     useEffect(() => {
       api_country.get('/').then(response => {
+
+            response.data = JSON.parse(JSON.stringify(response.data, function(a, b) {
+            return typeof b === "string" ? b.toLowerCase() : b
+          }))
           setCountry(response.data)
+          console.log(response.data);
       })
     }, [])
 
