@@ -177,8 +177,10 @@
     font-size: 1em;
     font-weight: 600;
     margin-left: 10px;
+    width: 70%;
     font-family: 'Nunito', sans-serif;
     color: rgb(172, 172, 172);
+    text-align: start ;
 }
 
 .country-incidents-data p  {
@@ -222,7 +224,8 @@
 .btn-drop {
     background-color: transparent;
     border: none;
-    width: 15px;
+    float: right;
+    margin-right: -10px;
 }
 
 .inputs {
