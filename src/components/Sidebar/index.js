@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+/* Format the numbers with comma */
 import NumberFormat from 'react-number-format';
 
 /* BOOTSTRAP COMPONENTS */
@@ -7,7 +8,7 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Carousel from 'react-bootstrap/Carousel'
 
-import api from '../../services/api'
+ /* useContext */
 import { useData } from "../../context/ApiData";
 
 import './styles.css'
@@ -21,27 +22,6 @@ import img4 from '../../assets/blue-4.png'
 
 export default function Sidebar() {
     const { data } = useData({});
-    const [country, setCountry] = useState({})
-
-
-    async function handleTrackCovid(e) {
-        e.preventDefault();
-
-        const country_name = country
-
-        try {
-            await api.get('/', {
-                params: {
-                    country: `${country_name}`,
-                }
-            }).then(response => {
-                console.log(response.data)
-            })
-        }
-        catch (err) {
-            alert('Search Error! Check the country name or the country ID')
-        }
-    }
 
     return (
         <aside className="aside-data data-group" >
@@ -90,21 +70,7 @@ export default function Sidebar() {
                 )} 
             </section>
 
-            {/* Form to search incidents by country name */}
             <div className="country-incidents-data">
-                <section className="search">
-                    <form className="inputs" onSubmit={handleTrackCovid}>
-                        <Form.Row className="form-row">
-                            <Form.Label column="lg" lg={0} className="form-label">
-                                Country:
-                            </Form.Label>
-                            <Col id="input-col-1" className="input-col" >
-                                <input onChange={e => setCountry(e.target.value)} id="city-name" size="lg" type="text" placeholder="Country Name" />
-                            </Col>
-                        </Form.Row>
-                        <button className="btn-consult" type="submit">Track</button>
-                    </form>
-                </section>
                 { data.locations? (
                     data.locations.map(item => 
                         <div key={data.locations.id}>
