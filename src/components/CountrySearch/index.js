@@ -7,7 +7,7 @@ import { FaMapMarkerAlt, FaAngleRight } from 'react-icons/fa';
 
 import './styles.css';
 
-export default function MapInfo() {
+export default function Search() {
     const [show, setShow] = useState(false);
     const target = useRef(null);
 
