@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import './styles.css'
 
@@ -32,8 +32,7 @@ fetch("https://coronavirus-tracker-api.herokuapp.com/v2/locations")
 		const locations = data.locations
 
 		locations.forEach(location => {
-			const { coordinates, latest, id } = location
-			console.log( coordinates, latest, id);
+			const { coordinates, latest } = location
 
 			new mapboxgl.Marker({
 				color: getColorFromConfirmedCount(latest.confirmed)

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState } from 'react'
 
 import NumberFormat from 'react-number-format';
 
@@ -9,6 +8,7 @@ import Col from 'react-bootstrap/Col'
 import Carousel from 'react-bootstrap/Carousel'
 
 import api from '../../services/api'
+import { useData } from "../../context/ApiData";
 
 import './styles.css'
 
@@ -20,15 +20,9 @@ import img4 from '../../assets/blue-4.png'
 
 
 export default function Sidebar() {
-    const [incidents, setIncidents] = useState({})
+    const { data } = useData({});
     const [country, setCountry] = useState({})
 
-    useEffect(() => {
-            api.get('/').then(response => {
-                console.log(response.data)
-                setIncidents(response.data)
-            })
-    }, [])
 
     async function handleTrackCovid(e) {
         e.preventDefault();
@@ -75,28 +69,28 @@ export default function Sidebar() {
                     <h3>World</h3>
                 </div>
         
-                { incidents.latest? (
-                <div className="total-incidents-data">
+                { data.latest? (
+                <div className="total-incidents-data" key={data.latest.confirmed}>
                     <button type="button" className="button" id="btn-confirmed">
-                    <NumberFormat value={incidents.latest.confirmed} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
+                    <NumberFormat value={data.latest.confirmed} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
                         <p>Confirmed</p>
                     </button>   
                     <button type="button" className="button" id="btn-deaths">
-                    <NumberFormat value={incidents.latest.deaths} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
+                    <NumberFormat value={data.latest.deaths} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
                         <p>Deaths</p>
                     </button> 
                     <button type="button" className="button" id="btn-recov">
-                    <NumberFormat value={incidents.latest.recovered} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
+                    <NumberFormat value={data.latest.recovered} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
                         <p>Recoveries</p>
                     </button> 
                         
                 </div>
                 ) : (
-                <div></div> 
+                <div key={data.latest}></div> 
                 )} 
             </section>
 
-            {/* Country name/province and incidents */}
+            {/* Form to search incidents by country name */}
             <div className="country-incidents-data">
                 <section className="search">
                     <form className="inputs" onSubmit={handleTrackCovid}>
@@ -111,9 +105,9 @@ export default function Sidebar() {
                         <button className="btn-consult" type="submit">Track</button>
                     </form>
                 </section>
-                { incidents.locations? (
-                    incidents.locations.map(item => 
-                        <>
+                { data.locations? (
+                    data.locations.map(item => 
+                        <div key={data.locations.id}>
                             <button type="button" className="each-country-btn">
                                 <h4>{item.country} {item.province}</h4>
                                 <p>{item.latest.confirmed}</p>
@@ -123,7 +117,7 @@ export default function Sidebar() {
                                 <p>Deaths: {item.latest.deaths}</p>
                                 <p>Recoveries: {item.latest.recovered}</p>
                             </div>
-                        </>
+                        </div>
                     )) : (
                     <div>nao entro em uber celta</div> 
                     

@@ -1,15 +1,14 @@
 import React from 'react';
 
-import { Provider } from 'react-redux';
-import store from './store';
-
 import Routes from './routes'
+
+import DataProvider from "./context/ApiData";
 
 function App() {
   return (
-    <Provider store={store}>
+    <DataProvider>
       <Routes />
-    </Provider>
+    </DataProvider>
   );
 }
 
