@@ -6,6 +6,7 @@ import NumberFormat from 'react-number-format';
 /* BOOTSTRAP COMPONENTS */
 import Carousel from 'react-bootstrap/Carousel'
 import { Accordion, Card } from 'react-bootstrap'
+import Spinner from 'react-bootstrap/Spinner'
 
 /* REACT ICONS */
 import { FaAngleDown, FaMapMarkerAlt} from 'react-icons/fa';
@@ -85,23 +86,27 @@ export default function Sidebar() {
                                     <Card.Header>
                                         <Accordion.Toggle variant="link" eventKey="0" className="each-country-btn">
                                             <h4>{item.country} {item.province}</h4>
-                                            <p>{item.latest.confirmed} <button className="btn-drop"><FaAngleDown /></button></p>
-                                            
+                                            <p>{item.latest.confirmed} <button className="btn-drop"><FaAngleDown /></button></p>        
                                         </Accordion.Toggle>
                                     </Card.Header>
                                     <Accordion.Collapse eventKey="0">
                                         <Card.Body className="dropdown-content">
-                                            <p>Confirmed: {item.latest.confirmed}</p>
-                                            <p>Deaths: {item.latest.deaths}</p>
-                                            <p>Recoveries: {item.latest.recovered}</p>
-                                            <span><FaMapMarkerAlt /></span>
+                                            <span><FaMapMarkerAlt /><p>{item.country_code}</p></span>
+                                            <img src={`https://raw.githubusercontent.com/djaiss/mapsicon/master/all/${item.country_code}/128.png`} alt={item.country}/>
+                                            <div className="dropdown-data">
+                                                <p>Confirmed: {item.latest.confirmed}</p>
+                                                <p>Deaths: {item.latest.deaths}</p>
+                                                <p>Recoveries: {item.latest.recovered}</p>
+                                            </div>
                                         </Card.Body>
                                     </Accordion.Collapse>
                                 </Card>
                             </Accordion>
                         </div>
                     )) : (
-                    <div>NÃO ENTRO EM UBER CELTA</div> 
+                        <Spinner className="loading-spinner" animation="border" role="status" variant="info">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>
                 )}
             </div>
         </aside>
