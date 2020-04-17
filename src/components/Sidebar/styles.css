@@ -149,7 +149,7 @@
     z-index: 9999;
 }
 
-.country-incidents-data .each-country-btn{
+.country-incidents-data .each-country-btn {
     font-family: 'Nunito', sans-serif;
     width: 100%;
     text-transform: uppercase;
@@ -164,13 +164,12 @@
     border: none;
     height: 70px;
     transition: ease-in-out .5s;
+    outline: none;
 }
 
 .card-country:hover {
     background-color: rgb(211, 210, 210);
     transition: ease-in-out .3s;
-    outline: none;
-    border-right: none;
 }
 
 .country-incidents-data h4 {
@@ -202,10 +201,10 @@
 .dropdown-content {
     display: flex;
     align-content: center;
-    justify-content: center;
+    justify-content: space-between;
     background-color: #191a1a;
     max-width: 90%;
-    height: 75px;
+    height: 110px;
     margin-left: 5%;
     margin-bottom: 10px;
     z-index: 1;
@@ -216,9 +215,27 @@
 
 .dropdown-content span {
     transform: rotateZ(20deg);
-    margin-top: -12px;
+    margin-left: 10px;
     color: #343332;
     font-size: 25px;
+}
+
+.dropdown-content span p {
+    text-transform: uppercase;
+    font-size: .8em;
+}
+
+.dropdown-content img {
+    width: 60px;
+    height: 60px;
+    margin: 10px 0 0 -60px;
+}
+
+.dropdown-data {
+    margin-top: -10px;
+    height: 100px;
+    padding-top: -50px;
+    font-size: .9em;
 }
 
 .btn-drop {
@@ -228,7 +245,12 @@
     margin-right: -10px;
 }
 
-.inputs {
+.loading-spinner {
+    border: 2px solid red;
+    margin: 20px 0 0 50%;
+}
+
+/* .inputs {
     width: 100%;
     padding: 15px;
     display: flex;
@@ -282,4 +304,4 @@
     border: none;
     background-color: rgb(0,153,204);
     transition: ease-in-out .4s;
-}
+} */
