@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState, useContext } from 'react';
 
-import api from '../services/api'
+import api_recovered from '../services/api_recovered'
 
 const DataContext = createContext();
 
@@ -8,7 +8,7 @@ export default function DataProvider({ children }) {
   const [data, setData]= useState({});
 
   useEffect(() => {
-    api.get('/').then(response => {
+    api_recovered.get('/').then(response => {
         setData(response.data)
     })
   }, [])

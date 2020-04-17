@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 /* Format the numbers with comma */
 import NumberFormat from 'react-number-format';
 
 /* BOOTSTRAP COMPONENTS */
-import Form from 'react-bootstrap/Form'
-import Col from 'react-bootstrap/Col'
 import Carousel from 'react-bootstrap/Carousel'
 
  /* useContext */
 import { useData } from "../../context/ApiData";
+import { useCountry } from "../../context/CountryData";
 
 import './styles.css'
 
@@ -22,6 +21,7 @@ import img4 from '../../assets/blue-4.png'
 
 export default function Sidebar() {
     const { data } = useData({});
+    const { country } = useCountry({});
 
     return (
         <aside className="aside-data data-group" >
@@ -49,18 +49,18 @@ export default function Sidebar() {
                     <h3>World</h3>
                 </div>
         
-                { data.latest? (
-                <div className="total-incidents-data" key={data.latest.confirmed}>
+                { data.confirmed? (
+                <div className="total-incidents-data" key={data.confirmed}>
                     <button type="button" className="button" id="btn-confirmed">
-                    <NumberFormat value={data.latest.confirmed} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
+                    <NumberFormat value={data.confirmed.value} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
                         <p>Confirmed</p>
                     </button>   
                     <button type="button" className="button" id="btn-deaths">
-                    <NumberFormat value={data.latest.deaths} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
+                    <NumberFormat value={data.deaths.value} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
                         <p>Deaths</p>
                     </button> 
                     <button type="button" className="button" id="btn-recov">
-                    <NumberFormat value={data.latest.recovered} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
+                    <NumberFormat value={data.recovered.value} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
                         <p>Recoveries</p>
                     </button> 
                         
@@ -71,9 +71,9 @@ export default function Sidebar() {
             </section>
 
             <div className="country-incidents-data">
-                { data.locations? (
-                    data.locations.map(item => 
-                        <div key={data.locations.id}>
+                { country.locations? (
+                    country.locations.map(item => 
+                        <div key={country.locations.id}>
                             <button type="button" className="each-country-btn">
                                 <h4>{item.country} {item.province}</h4>
                                 <p>{item.latest.confirmed}</p>

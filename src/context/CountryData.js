@@ -1,30 +1,17 @@
 import React, { createContext, useEffect, useState, useContext } from 'react';
 
-import api from '../services/api'
+import api_country from '../services/api_country'
 
 const CountryContext = createContext();
 
 export default function CountryProvider({ children }) {
     const [country, setCountry] = useState({})
 
-    async function handleTrackCovid(e) {
-        e.preventDefault();
-
-        const country_name = country
-
-        try {
-            await api.get('/', {
-                params: {
-                    country: `${country_name}`,
-                }
-            }).then(response => {
-                console.log(response.data)
-            })
-        }
-        catch (err) {
-            alert('Search Error! Check the country name or the country ID')
-        }
-    }
+    useEffect(() => {
+      api_country.get('/').then(response => {
+          setCountry(response.data)
+      })
+    }, [])
 
   return (
     <CountryContext.Provider
