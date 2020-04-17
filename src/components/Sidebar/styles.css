@@ -132,7 +132,6 @@
     font-size: .5em;
 } 
 
-
 /* Incidents per country */
 .country-incidents-data .each-country-btn{
     font-family: 'Nunito', sans-serif;
@@ -145,6 +144,7 @@
     transition: ease-in-out .3s;
     align-items: center;
     justify-content: space-between;
+    padding-top: 15px;
     border: none;
     border-bottom: .5px solid rgb(206, 206, 206);
     height: 70px;
@@ -170,17 +170,30 @@
     font-weight: 600;
     color: rgb(221, 65, 143);
 }
-.country-data-hidden {
-    display: none;
-    position: absolute;
-    z-index: 1;
-    align-content: center;
-    justify-content: space-around;
-    width: 80%;
-    border-radius: 6px;
-    border: .5px solid rgb(182, 182, 182);
-    margin: 20px 10%;
+
+.dropdown {
+    position: relative;
+    display: block;
 }
+
+.dropdown-content {
+    display: none;
+    background-color: #e9e9e9;
+    max-width: 90%;
+    height: 70px;
+    padding-top: 15px;
+    margin-left: 5%;
+    z-index: 1;
+    border-radius: 8px;
+    transition: ease-in 8.5s;
+}
+
+.dropdown:focus .dropdown-content {
+    transition: ease-in 8.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
 .inputs {
     width: 100%;

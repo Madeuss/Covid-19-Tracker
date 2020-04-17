@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { useCountry } from "../../context/CountryData";
 
@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col'
 import './styles.css'
 
 export default function CountryData() {
-  const { country, setCountry } = useCountry({});
+  const { setCountry } = useCountry({});
 
   return (
       <section className="search">

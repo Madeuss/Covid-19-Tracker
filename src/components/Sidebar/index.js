@@ -1,10 +1,13 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
+
 /* Format the numbers with comma */
 import NumberFormat from 'react-number-format';
 
 /* BOOTSTRAP COMPONENTS */
 import Carousel from 'react-bootstrap/Carousel'
+import { FaAngleDown, FaBeer } from 'react-icons/fa';
 
  /* useContext */
 import { useData } from "../../context/ApiData";
@@ -44,6 +47,7 @@ export default function Sidebar() {
                 </Carousel>
             </section>
 
+             {/* WORLD DATA INCIDENTS */}
             <section className="world-incidents">
                 <div className="world-data-title">
                     <h3>World</h3>
@@ -69,24 +73,24 @@ export default function Sidebar() {
                 <div key={data.latest}></div> 
                 )} 
             </section>
-
+            
+            {/* COUNTRIES DATA */}
             <div className="country-incidents-data">
                 { country.locations? (
                     country.locations.map(item => 
-                        <div key={country.locations.id}>
+                        <div key={country.locations.id} className="dropdown">
                             <button type="button" className="each-country-btn">
                                 <h4>{item.country} {item.province}</h4>
-                                <p>{item.latest.confirmed}</p>
+                                <p>{item.latest.confirmed} <Link className="linkDrop"><FaAngleDown /></Link></p>
                             </button>
-                            <div className="country-data-hidden" aria-hidden="false">
+                            <div className="dropdown-content" id="dropfodase">
                                 <p>Confirmed: {item.latest.confirmed}</p>
                                 <p>Deaths: {item.latest.deaths}</p>
                                 <p>Recoveries: {item.latest.recovered}</p>
                             </div>
                         </div>
                     )) : (
-                    <div>nao entro em uber celta</div> 
-                    
+                    <div>NÃO ENTRO EM UBER CELTA</div> 
                 )}
             </div>
         </aside>
