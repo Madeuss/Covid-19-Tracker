@@ -14,7 +14,6 @@ export default function CountryProvider({ children }) {
             return typeof b === "string" ? b.toLowerCase() : b
           }))
           setCountry(response.data)
-          console.log(response.data);
       })
     }, [])
 
