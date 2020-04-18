@@ -5,6 +5,7 @@ import './styles.css';
 import Sidebar from '../../components/Sidebar'
 import MapBox from '../../components/MapBox'
 import MapInfo from '../../components/MapInfo'
+import Search from '../../components/CountrySearch'
 // import Teste from '../../components/Teste'
 export default function Main() {
   return (
@@ -12,6 +13,7 @@ export default function Main() {
         <Sidebar />
         <MapInfo />
         <MapBox />
+        <Search />
     </>
   );
 }
