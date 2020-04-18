@@ -17,6 +17,8 @@ import { useCountry } from "../../context/CountryData";
 
 import './styles.css'
 
+import virus from '../../assets/virus.svg'
+
 /* WHO ADVICES CAROUSEL IMAGES */
 import img1 from '../../assets/blue-1.png'
 import img2 from '../../assets/blue-2.png'
@@ -31,7 +33,7 @@ export default function Sidebar() {
     return (
         <aside className="aside-data data-group" >
             <section className="covid-info">
-                <h1>COVID-19 INCIDENTS</h1>
+                <h1>C<span className="virus-ico"><img src={virus} alt="covid-19" /></span>VID-19 INCIDENTS</h1>
         
                 <Carousel indicators={false} keyboard={false} interval={12000} className="carousel">
                     <Carousel.Item>
@@ -80,13 +82,13 @@ export default function Sidebar() {
             <div className="country-incidents-data">
                 { country.locations? (
                     country.locations.map(item => 
-                        <div key={country.locations.id} className="dropdown">
+                        <div key={item.id} className="dropdown">
                             <Accordion className="card-country">
                                 <Card className="card-country">
                                     <Card.Header>
                                         <Accordion.Toggle variant="link" eventKey="0" className="each-country-btn">
                                             <h4>{item.country} {item.province}</h4>
-                                            <p>{item.latest.confirmed} <button className="btn-drop"><FaAngleDown /></button></p>        
+                                            <p>{item.latest.confirmed}<FaAngleDown id="angledown-icon" /></p>        
                                         </Accordion.Toggle>
                                     </Card.Header>
                                     <Accordion.Collapse eventKey="0">
