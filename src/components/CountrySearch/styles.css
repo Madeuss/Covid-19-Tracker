@@ -21,6 +21,7 @@
 }
 
 .overlay {
+    margin: 5px 4px 0 0;
     height: auto;
     width: 300px;
     border: 1px solid rgb(73, 73, 73);

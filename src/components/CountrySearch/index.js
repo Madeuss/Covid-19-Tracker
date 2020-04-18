@@ -60,7 +60,6 @@ export default function Search() {
               {...props}
               style={{
                 padding: '5px 10px',
-                margin: '5px 4px 0 0',
                 color: 'white',
                 borderRadius: 3,
                 ...props.style,
