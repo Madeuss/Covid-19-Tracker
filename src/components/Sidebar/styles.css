@@ -8,6 +8,7 @@
     z-index: 999999;
     border-top: 0.25rem solid rgb(221, 65, 143);
     width: 33%;
+    height: auto;
     box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
     overflow: scroll;
     background-color: rgb(245, 245, 245);
@@ -18,7 +19,7 @@
    /* width */
    ::-webkit-scrollbar {
     width: 7.5px;
-    height: 8px;
+    height: 2px;
   }
   
   /* Track */
@@ -45,7 +46,7 @@
 }
 
 .carousel img{
-    height: 440px;
+    height: 420px;
 }
 
 .covid-info h1{
@@ -72,14 +73,30 @@
     margin-top: 10px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding-left: 10px;
+    padding-right: 10px;
 }
 
 .world-data-title h3{
     font-size: 1.5em;
-    color: mediumvioletred;
+    color: rgb(27, 27, 27);
     font-family: 'Gotu', sans-serif;
     font-weight: 600;
+}
+
+.world-data-title span {
+    margin-left: 10px;
+    padding-top: 10px;
+    display: flex;
+    text-align: center;
+}
+
+.world-data-title span p {
+    margin-top: -7px;
+    margin-right: 10px;
+    font-size: .8em;
+    color: rgba(0, 0, 0, 0.692);
 }
 
 .total-incidents-data {
@@ -89,7 +106,7 @@
     justify-content: space-between;
     list-style: none;
     text-align: center;
-    border-bottom: 2px solid rgb(145, 145, 145);
+    border-bottom: 1px solid rgb(145, 145, 145);
 }
 
 .total-incidents-data .button {
@@ -97,38 +114,64 @@
     background-color: transparent;
     border: none;
     border-bottom: 2px solid rgb(145, 145, 145);
-    height: 80px;
-    font-size: 1.8em;
-    font-weight: bold;
+    height: auto;
+    font-size: 1.3em;
     cursor: pointer;
     font-family: 'Gotu', sans-serif;
     transition: ease-in-out .1s;
 }
 
 .total-incidents-data .button:hover {
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(211, 211, 211);
     transition: ease-in-out .2s;
+}
+
+.btn-filter {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 80px;
+    font-size: 1em;
+    font-weight: 600;
+    color: #424242;
+    border-right: .25px solid grey;
 }
 
 .num-format {
     border: none;
 }
 
+#btn-confirmed {
+    border-bottom: 3px solid rgb(252, 231, 44);
+}
+
+#btn-deaths {
+    border-bottom: 3px solid rgb(228, 71, 71);
+}
+
+#btn-recov {
+    border-bottom: 3px solid rgb(72, 84, 247);
+}
+
  #btn-confirmed:hover,  #btn-confirmed:focus {
-    border-bottom: 3px solid rgb(247, 244, 81);
-    color: rgb(240, 238, 116);
+    border-bottom: 3px solid rgb(252, 168, 44);
+    color: rgb(252, 168, 44);
+    background-color: rgb(211, 211, 211);
+    text-shadow: rgba(0,0,0);
     transition: ease-in-out .23s;
 }
 
  #btn-deaths:hover, #btn-deaths:focus {
     border-bottom: 3px solid rgb(228, 71, 71);
     color: rgb(228, 71, 71);
+    background-color: rgb(211, 211, 211);
     transition: ease-in-out .23s;
 }
 
- #btn-recov:hover, #btn-recov:focus {
-    border-bottom: 3px solid rgb(111, 226, 235);
-    color: rgb(111, 226, 235);
+ #btn-recov:hover, #btn-recov:focus, #btn-recov:visited {
+    border-bottom: 3px solid rgb(72, 84, 247);
+    color: rgb(72, 84, 247);
+    background-color: rgb(211, 211, 211);
     transition: ease-in-out .23s;
 }
 
@@ -167,11 +210,29 @@
     transition: ease-in-out .3s;
     align-items: center;
     justify-content: space-between;
-    padding-top: 15px;
     border: none;
     height: 70px;
     transition: ease-in-out .5s;
     outline: none;
+}
+
+.span-total-incidents {
+    margin-bottom: 45px;
+    margin-left: 80px;
+    height: 40px;
+    width: 150px;
+}
+
+.span-total-incidents p:nth-child(1){
+    font-size: .7em;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    color: rgba(80, 80, 80, 0.726);
+}
+
+.span-total-incidents p:nth-child(2){
+    margin: -5px 0 0 0px;
+    color: blueviolet;
 }
 
 .card-country:hover {
@@ -195,10 +256,6 @@
     margin-right: 10px;
     font-family: 'Gotu', sans-serif;
     font-weight: 600;
-}
-
-.country-incidents-data .each-country-btn p  {
-    color: rgb(221, 65, 143);
 }
 
 .country-incidents-data .dropdown-content p  {
