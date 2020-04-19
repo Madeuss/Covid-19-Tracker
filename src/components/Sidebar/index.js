@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 /* Format the numbers with comma */
 import NumberFormat from 'react-number-format';
@@ -6,14 +6,15 @@ import NumberFormat from 'react-number-format';
 /* BOOTSTRAP COMPONENTS */
 import Carousel from 'react-bootstrap/Carousel'
 import { Accordion, Card } from 'react-bootstrap'
-import Spinner from 'react-bootstrap/Spinner'
 
 /* REACT ICONS */
-import { FaAngleDown, FaMapMarkerAlt} from 'react-icons/fa';
+import { FaAngleDown, FaMapMarkerAlt} from 'react-icons/fa'
+import { GiClick } from 'react-icons/gi'
 
  /* useContext */
-import { useData } from "../../context/ApiData";
-import { useCountry } from "../../context/CountryData";
+import { useData } from "../../context/ApiData"
+
+import api_recovered from '../../services/api_recovered'
 
 import './styles.css'
 
@@ -25,10 +26,47 @@ import img2 from '../../assets/blue-2.png'
 import img3 from '../../assets/blue-3.png'
 import img4 from '../../assets/blue-4.png'
 
-
 export default function Sidebar() {
     const { data } = useData({});
-    const { country } = useCountry({});
+
+    const [dataDefault, setDataDefault] = useState([])
+
+    const [filter, setFilter] = useState('')
+	const [info, setInfo] = useState([])
+
+    useEffect(() => {
+        (async function loadDefaultData() {
+            const response = await api_recovered.get('/confirmed');
+
+            response.data = JSON.parse(JSON.stringify(response.data, function(a, b) {
+				return typeof b === "string" ? b.toLowerCase() : b
+              }))
+
+            console.log(response.data.slice(0, 40));
+            setDataDefault(response.data.slice(0, 40));
+        })()
+    }, [])
+
+    async function handleFilter(e) {
+      e.preventDefault();
+
+      const filter_name = filter
+
+      try {
+          await api_recovered.get(`/${filter_name}`)
+          .then(response => {
+
+            response.data = JSON.parse(JSON.stringify(response.data, function(a, b) {
+				return typeof b === "string" ? b.toLowerCase() : b
+              }))
+            console.log(response.data.slice(0, 30)); 
+            setInfo(response.data.slice(0, 30))
+          })
+      }
+      catch (err) {
+          alert('Search Error! Check the correct filter')
+      }
+    }
 
     return (
         <aside className="aside-data data-group" >
@@ -54,51 +92,76 @@ export default function Sidebar() {
              {/* WORLD DATA INCIDENTS */}
             <section className="world-incidents">
                 <div className="world-data-title">
-                    <h3>World</h3>
+                    <h3>World Incidents</h3>
+                    <span><p>Click below to filter by <br />top 30 countries</p><GiClick /></span>
                 </div>
         
                 { data.confirmed? (
                 <div className="total-incidents-data" key={data.confirmed}>
-                    <button type="button" className="button" id="btn-confirmed">
-                    <NumberFormat value={data.confirmed.value} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
-                        <p>Confirmed</p>
-                    </button>   
-                    <button type="button" className="button" id="btn-deaths">
-                    <NumberFormat value={data.deaths.value} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
-                        <p>Deaths</p>
-                    </button> 
-                    <button type="button" className="button" id="btn-recov">
-                    <NumberFormat value={data.recovered.value} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value}</div>} />
-                        <p>Recoveries</p>
-                    </button> 
-                        
+                    <form className="button" onSubmit={handleFilter} >
+                        <button className="btn-filter" id="btn-confirmed" type="submit" value="confirmed" onClick={e => setFilter(e.target.value)}>
+                            <NumberFormat value={data.confirmed.value} displayType={'text'} thousandSeparator={true} renderText={value => <>{value}</>} />
+                            <br />Confirmed
+                        </button>
+                    </form>  
+                    <form className="button" onSubmit={handleFilter} >
+                        <button className="btn-filter" id="btn-deaths" idtype="submit" value="deaths" onClick={e => setFilter(e.target.value)}>
+                            <NumberFormat value={data.deaths.value} displayType={'text'} thousandSeparator={true} renderText={value => <>{value}</>} />
+                            <br />Deaths
+                        </button>
+                    </form>   
+                    <form className="button" onSubmit={handleFilter} >
+                        <button className="btn-filter" id="btn-recov" type="submit" value="recovered" onClick={e => setFilter(e.target.value)}>
+                            <NumberFormat value={data.recovered.value} displayType={'text'} thousandSeparator={true} renderText={value => <>{value}</>} />
+                            <br />Recoveries
+                        </button>
+                    </form>  
                 </div>
                 ) : (
-                <div key={data.latest}></div> 
+                <div key={data}></div> 
                 )} 
             </section>
             
             {/* COUNTRIES DATA */}
             <div className="country-incidents-data">
-                { country.locations? (
-                    country.locations.map(item => 
-                        <div key={item.id} className="dropdown">
+                { info ? (
+                    info.map(item => 
+                        <div key={item.provinceState + item.incidentRate + item.combinedKey} className="dropdown">
                             <Accordion className="card-country">
                                 <Card className="card-country">
                                     <Card.Header>
                                         <Accordion.Toggle variant="link" eventKey="0" className="each-country-btn">
-                                            <h4>{item.country} {item.province}</h4>
-                                            <p>{item.latest.confirmed}<FaAngleDown id="angledown-icon" /></p>        
+                                            <h4>{item.countryRegion} {item.provinceState}</h4>
+                                            <NumberFormat value={item.confirmed} displayType={'text'} thousandSeparator={true} 
+                                                renderText={value => 
+                                                    <span className="span-total-incidents"> 
+                                                        <p>total confirmed incidents</p>
+                                                        <p>{value}<FaAngleDown id="angledown-icon" /></p> 
+                                                    </span>
+                                                } 
+                                            />       
                                         </Accordion.Toggle>
                                     </Card.Header>
                                     <Accordion.Collapse eventKey="0">
                                         <Card.Body className="dropdown-content">
-                                            <span><FaMapMarkerAlt /><p>{item.country_code}</p></span>
-                                            <img src={`https://raw.githubusercontent.com/djaiss/mapsicon/master/all/${item.country_code}/128.png`} alt={item.country}/>
+                                            <span><FaMapMarkerAlt /><p>{item.iso2}</p></span>
+                                            <img src={`https://raw.githubusercontent.com/djaiss/mapsicon/master/all/${item.iso2}/128.png`} alt={item.countryRegion}/>
                                             <div className="dropdown-data">
-                                                <p>Confirmed: {item.latest.confirmed}</p>
-                                                <p>Deaths: {item.latest.deaths}</p>
-                                                <p>Recoveries: {item.latest.recovered}</p>
+                                                <NumberFormat value={item.confirmed} displayType={'text'} thousandSeparator={true} 
+                                                    renderText={value => 
+                                                        <p>Confirmed: {value}</p> 
+                                                    } 
+                                                />
+                                                <NumberFormat value={item.deaths} displayType={'text'} thousandSeparator={true} 
+                                                    renderText={value => 
+                                                        <p>Deaths: {value}</p> 
+                                                    } 
+                                                />
+                                                <NumberFormat value={item.recovered} displayType={'text'} thousandSeparator={true} 
+                                                    renderText={value => 
+                                                        <p>Recoveries: {value}</p> 
+                                                    } 
+                                                />
                                             </div>
                                         </Card.Body>
                                     </Accordion.Collapse>
@@ -106,9 +169,7 @@ export default function Sidebar() {
                             </Accordion>
                         </div>
                     )) : (
-                        <Spinner className="loading-spinner" animation="border" role="status" variant="info">
-                            <span className="sr-only">Loading...</span>
-                        </Spinner>
+                    <div>fodase</div>
                 )}
             </div>
         </aside>
