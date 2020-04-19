@@ -25,7 +25,7 @@ export default function DataProvider({ children }) {
   );
 }
 
-export function useData() {
+  export function useData() {
   const context = useContext(DataContext);
   if (!context) throw new Error("useData must be used within a DataProvider");
   const { data, setData } = context;
