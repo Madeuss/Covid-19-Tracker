@@ -142,19 +142,19 @@
 }
 
 #btn-confirmed {
-    border-bottom: 3px solid rgb(252, 231, 44);
+    border-bottom: 3px solid rgba(252, 231, 44, 0.8);
 }
 
 #btn-deaths {
-    border-bottom: 3px solid rgb(228, 71, 71);
+    border-bottom: 3px solid rgb(228, 71, 71, 0.6);
 }
 
 #btn-recov {
-    border-bottom: 3px solid rgb(72, 84, 247);
+    border-bottom: 3px solid rgb(72, 84, 247, 0.7);
 }
 
  #btn-confirmed:hover,  #btn-confirmed:focus {
-    border-bottom: 3px solid rgb(252, 168, 44);
+    border-bottom: 3px solid rgba(252, 231, 44);
     color: rgb(252, 168, 44);
     background-color: rgb(211, 211, 211);
     text-shadow: rgba(0,0,0);
