@@ -6,6 +6,9 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Spinner from 'react-bootstrap/Spinner'
 
+/* Format the numbers with comma */
+import NumberFormat from 'react-number-format';
+
 /* REACT ICONS */
 import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 
@@ -20,7 +23,7 @@ export default function Search() {
     const target = useRef(null);
 
     const [country, setCountry] = useState('')
-	const [data, setData] = useState([])
+	  const [data, setData] = useState([])
 
     async function handleConsultCountry(e) {
       e.preventDefault();
@@ -30,17 +33,13 @@ export default function Search() {
       try {
           await api_recovered.get(`/countries/${country_name}/confirmed`)
           .then(response => {
-
-			response.data = JSON.parse(JSON.stringify(response.data, function(a, b) {
-				return typeof b === "string" ? b.toLowerCase() : b
-			  }))
 			setData(response.data)
           })
       }
       catch (err) {
           alert('Search Error! Check the country name')
       }
-  }
+    }
 
     return (
       <div className="country-search">
@@ -56,7 +55,7 @@ export default function Search() {
             show: _show,
             ...props
           }) => (
-            <div className="overlay"
+            <div className="overlay overlay-search"
               {...props}
               style={{
                 padding: '5px 10px',
@@ -80,20 +79,36 @@ export default function Search() {
                   </form>
                 </section>
                 <section className="country-info">
-                  {data ? (
+                  { country ? (
                     data.map(item =>
                       <>
                         <section className="country-title" key={item}>
                           	<h2 className="title">{item.countryRegion} {item.provinceState}<FaMapMarkerAlt className="icon" /></h2>
                         </section>
                         <section className="flag">
-                        	<img src={`https://raw.githubusercontent.com/hjnilsson/country-flags/master/png100px/${item.iso3.toLowerCase().substring(0,2)}.png`} alt={`${item.countryRegion} flag`}></img>
+                        	<img src={`https://www.countries-ofthe-world.com/flags-normal/flag-of-${item.countryRegion}.png`} alt={`${item.countryRegion} flag`}></img>
 						</section>
                         <section className="data">
-							<div className="div-data"><p>Confirmed</p> <p>{item.confirmed}</p></div>
-							<div className="div-data"><p>Recoveries</p> <p>{item.recovered}</p></div>
-							<div className="div-data"><p>Actives</p> <p>{item.active}</p></div>
-							<div className="div-data"><p>Deaths</p> <p>{item.deaths}</p></div>
+							<NumberFormat value={item.confirmed} displayType={'text'} thousandSeparator={true} 
+                                renderText={value => 
+                                    <div className="div-data"><p>Confirmed</p> <p>{value}</p></div>
+                                } 
+                            />
+							<NumberFormat value={item.recovered} displayType={'text'} thousandSeparator={true} 
+                                renderText={value => 
+                                    <div className="div-data"><p>Recoveries</p> <p>{value}</p></div>
+                                } 
+                            />
+							<NumberFormat value={item.active} displayType={'text'} thousandSeparator={true} 
+                                renderText={value => 
+                                    <div className="div-data"><p>Actives</p> <p>{value}</p></div>
+                                } 
+                            />
+							<NumberFormat value={item.deaths} displayType={'text'} thousandSeparator={true} 
+                                renderText={value => 
+                                    <div className="div-data"><p>Deaths</p> <p>{value}</p></div>
+                                } 
+                            />						
                         </section>
                       </>
                   )) : (
