@@ -41,6 +41,7 @@ export default function Sidebar() {
 			response.data = JSON.parse(JSON.stringify(response.data, function(a, b) {
 				return typeof b === "string" ? b.toLowerCase() : b
 			  }))
+			console.log(response.data.slice(0, 50));
 			setDataDefault(response.data.slice(0, 50));
 		})()
 	}, [])
@@ -57,6 +58,7 @@ export default function Sidebar() {
 			response.data = JSON.parse(JSON.stringify(response.data, function(a, b) {
 				return typeof b === "string" ? b.toLowerCase() : b
 			})) 
+			console.log(response.data.slice(0, 50))
 			setInfo(response.data.slice(0, 50))
 		  })
 	  }
@@ -81,8 +83,9 @@ export default function Sidebar() {
 	const getDataFromFilter = filter_name => {
 
 		// if (filter_name === 'confirmed'){
-		// 	{info.map(item =>
-		// 	   {console.log(item.confirmed)}
+		// 	{info.map(item => {
+		// 			console.log(item.confirmed.toString().slice(0, 1))
+		// 		}
 		// 	)}
 		// }
 		// if (filter_name === 'deaths' ){
@@ -93,11 +96,10 @@ export default function Sidebar() {
 		// }
 		// if (filter_name === 'recovered' ){
 		// 	{info.map(item =>
-		// 		{console.log(item.recovered)}
+		// 		{return item.recovered}
 		// 	 )}
-
 		// }
-		return 'Error(#StayHome)'
+		return 'nao deu certo fodase'
 	}
 
 	return (
@@ -143,7 +145,7 @@ export default function Sidebar() {
 						</button>
 					</form>   
 					<form className="button" onSubmit={handleFilter} >
-						<button className="btn-filter" id="btn-recov" type="submit" value="recovered" onClick={e => setFilter(e.target.value)}>
+						<button autoFocus className="btn-filter" id="btn-recov" type="submit" value="recovered" onClick={e => setFilter(e.target.value)}>
 							<NumberFormat value={data.recovered.value} displayType={'text'} thousandSeparator={true} renderText={value => <>{value}</>} />
 							<br />Recoveries
 						</button>
@@ -208,10 +210,10 @@ export default function Sidebar() {
 										<Card.Header>
 											<Accordion.Toggle variant="link" eventKey="0" className="each-country-btn">
 												<h4>{item.countryRegion} {item.provinceState}</h4>
-												<NumberFormat value={getDataFromFilter(filter)} displayType={'text'} thousandSeparator={true} 
+												<NumberFormat value={item.recovered} displayType={'text'} thousandSeparator={true} 
 													renderText={value => 
 														<span className="span-total-incidents"> 
-															<p>{getTitleFromFilter(filter)}</p>
+															<p>total recovered incidents</p>
 															<p>{value}<FaAngleDown id="angledown-icon" /></p> 
 														</span>
 													} 
