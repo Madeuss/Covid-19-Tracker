@@ -80,27 +80,32 @@ export default function Sidebar() {
 		return 'total recovered incidents'
 	}
 
-	const getDataFromFilter = filter_name => {
+	const getDataFromFilter = (filter_name, item) => {
 
-		// if (filter_name === 'confirmed'){
-		// 	{info.map(item => {
-		// 			console.log(item.confirmed.toString().slice(0, 1))
-		// 		}
-		// 	)}
-		// }
-		// if (filter_name === 'deaths' ){
-		// 	{info.map(item =>
-		// 		{console.log(item.deaths)}
-		// 	 )}
-			 
-		// }
-		// if (filter_name === 'recovered' ){
-		// 	{info.map(item =>
-		// 		{return item.recovered}
-		// 	 )}
-		// }
-		return 'nao deu certo fodase'
+		if (filter_name === 'confirmed'){
+			return item.confirmed
+		}
+		if (filter_name === 'deaths' ){
+			return item.deaths
+		}
+		if (filter_name === 'recovered' ){
+			return item.recovered
+		}
 	}
+
+	const valueStyle = (filter_name) => {
+
+		if (filter_name === 'confirmed'){
+			return {color: 'rgba(252, 171, 44)'}
+		}
+		if (filter_name === 'deaths' ){
+			return {color: 'rgb(228, 71, 71)'}
+		}
+		if (filter_name === 'recovered' ){
+			return {color: 'blueviolet'}
+		}
+
+	  }
 
 	return (
 		<aside className="aside-data data-group" >
@@ -127,7 +132,7 @@ export default function Sidebar() {
 			<section className="world-incidents">
 				<div className="world-data-title">
 					<h3>World Incidents</h3>
-					<span><p>Click below to filter by <br />top 50 countries</p><GiClick /></span>
+					<span><p>Click below to filter by <br />top 50 locations</p><GiClick /></span>
 				</div>
 		
 				{ data.confirmed? (
@@ -166,11 +171,11 @@ export default function Sidebar() {
 									<Card.Header>
 										<Accordion.Toggle variant="link" eventKey="0" className="each-country-btn">
 											<h4>{item.countryRegion} {item.provinceState}</h4>
-											<NumberFormat value={getDataFromFilter(filter)} displayType={'text'} thousandSeparator={true} 
+											<NumberFormat value={getDataFromFilter(filter, item)} displayType={'text'} thousandSeparator={true} 
 												renderText={value => 
 													<span className="span-total-incidents"> 
 														<p>{getTitleFromFilter(filter)}</p>
-														<p>{value}<FaAngleDown id="angledown-icon" /></p> 
+														<p style={valueStyle(filter)}>{value}<FaAngleDown id="angledown-icon" /></p> 
 													</span>
 												} 
 											/>       
@@ -214,7 +219,7 @@ export default function Sidebar() {
 													renderText={value => 
 														<span className="span-total-incidents"> 
 															<p>total recovered incidents</p>
-															<p>{value}<FaAngleDown id="angledown-icon" /></p> 
+															<p style={{color: 'blueviolet'}}>{value}<FaAngleDown id="angledown-icon" /></p> 
 														</span>
 													} 
 												/>       

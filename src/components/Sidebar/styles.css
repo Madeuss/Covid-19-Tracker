@@ -186,14 +186,6 @@
     z-index: 9999;
 }
 
-.card-country {
-    width: 100%;
-    background-color: transparent;
-    padding: 0;
-    margin: 0;
-    z-index: 9999;
-}
-
 .country-incidents-data .each-country-btn {
     font-family: 'Nunito', sans-serif;
     width: 100%;
@@ -207,7 +199,7 @@
     justify-content: space-between;
     border: none;
     height: 70px;
-    transition: ease-in-out .5s;
+    transition: linear 1s;
     outline: none;
 }
 
@@ -227,7 +219,6 @@
 
 .span-total-incidents p:nth-child(2){
     margin: -5px 0 0 0px;
-    color: blueviolet;
 }
 
 .card-country:hover {
