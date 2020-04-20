@@ -33,7 +33,7 @@ export default function Search() {
       try {
           await api_recovered.get(`/countries/${country_name}/confirmed`)
           .then(response => {
-			setData(response.data)
+			setData(response.data.slice(0, 10))
           })
       }
       catch (err) {
@@ -81,7 +81,7 @@ export default function Search() {
                 <section className="country-info">
                   { country ? (
                     data.map(item =>
-                      <div>
+                      <div key={item}>
                         <section className="country-title" key={item}>
                           	<h2 className="title">{item.countryRegion} {item.provinceState}<FaMapMarkerAlt className="icon" /></h2>
                         </section>
