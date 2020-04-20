@@ -3,7 +3,7 @@
 </h1>
 <h4 align="center">
     <img alt="Medical Care" title="#logo" src=".github/coronavirus.svg" width="35px" height="35px" /> 
-       Covid-19 Traker 
+       Covid-19 Tracker 
     <img alt="Medical Care" title="#logo" src=".github/medical-mask.svg" width="35px" height="35px"/>
 </h4>
 
