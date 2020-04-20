@@ -33,6 +33,7 @@ export default function Search() {
       try {
           await api_recovered.get(`/countries/${country_name}/confirmed`)
           .then(response => {
+			console.log(response.data.slice(0, 10))
 			setData(response.data.slice(0, 10))
           })
       }
@@ -72,7 +73,7 @@ export default function Search() {
                         Country:
                       </Form.Label>
                       <Col id="input-col-1" className="input-col" >
-                        <input autoComplete="off" value={country} onChange={e => setCountry(e.target.value)} id="city-name" size="lg" type="text" placeholder="Country Name" />
+                        <input autoComplete="off" autoFocus value={country} onChange={e => setCountry(e.target.value)} id="city-name" size="lg" type="text" placeholder="Country Name" />
                       </Col>
                     </Form.Row>
                     <button className="btn-consult" type="submit">Track</button>
