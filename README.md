@@ -16,8 +16,11 @@
 
 <br>
 
+<p align="center">
+    <img alt="Frontend" title="desktop-demo-image" src=".github/desktop-image.png" width="480px" height="250px"/>
+</p>
 <h1 align="center">
-    <img alt="Frontend" title="#logo" src=".github/desktop-image.png" width="480px" height="250px"/>
+    <img alt="Frontend" title="search-demo-gif" src=".github/search-demo.gif"/>
 </h1>
 
 ## :rocket: Tecnologias
