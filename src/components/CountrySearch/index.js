@@ -87,7 +87,12 @@ export default function Search() {
                           	<h2 className="title">{item.countryRegion} {item.provinceState}<FaMapMarkerAlt className="icon" /></h2>
                         </section>
                         <section className="flag">
-						<img src={`https://www.countries-ofthe-world.com/flags-normal/flag-of-${item.countryRegion}.png`} alt={`${item.countryRegion} flag`}></img>
+							{
+								item.countryRegion ? (
+									<img src={`https://www.countries-ofthe-world.com/flags-normal/flag-of-${item.countryRegion}.png`} alt={`${item.countryRegion} flag`}></img>
+								)
+								: null
+							}
 						</section>
                         <section className="data">
 							<NumberFormat value={item.confirmed} displayType={'text'} thousandSeparator={true} 
