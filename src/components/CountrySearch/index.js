@@ -66,13 +66,13 @@ export default function Search() {
             >
                 <span className="search-title"><h3>Track By Country</h3> <img src={worldsick} alt="World Sick" /></span> <br />
                 <section className="search">
-                  <form className="inputs" onSubmit={handleConsultCountry}>
+                  <form className="inputs" autoComplete="off" onSubmit={handleConsultCountry}>
                     <Form.Row className="form-row">
                       <Form.Label column="lg" lg={0} className="form-label">
                         Country:
                       </Form.Label>
                       <Col id="input-col-1" className="input-col" >
-                        <input value={country} onChange={e => setCountry(e.target.value)} id="city-name" size="lg" type="text" placeholder="Country Name" />
+                        <input autoComplete="off" value={country} onChange={e => setCountry(e.target.value)} id="city-name" size="lg" type="text" placeholder="Country Name" />
                       </Col>
                     </Form.Row>
                     <button className="btn-consult" type="submit">Track</button>
@@ -81,12 +81,12 @@ export default function Search() {
                 <section className="country-info">
                   { country ? (
                     data.map(item =>
-                      <>
+                      <div>
                         <section className="country-title" key={item}>
                           	<h2 className="title">{item.countryRegion} {item.provinceState}<FaMapMarkerAlt className="icon" /></h2>
                         </section>
                         <section className="flag">
-                        	<img src={`https://www.countries-ofthe-world.com/flags-normal/flag-of-${item.countryRegion}.png`} alt={`${item.countryRegion} flag`}></img>
+						<img src={`https://www.countries-ofthe-world.com/flags-normal/flag-of-${item.countryRegion}.png`} alt={`${item.countryRegion} flag`}></img>
 						</section>
                         <section className="data">
 							<NumberFormat value={item.confirmed} displayType={'text'} thousandSeparator={true} 
@@ -110,7 +110,7 @@ export default function Search() {
                                 } 
                             />						
                         </section>
-                      </>
+                      </div>
                   )) : (
                     <div className="waiting">
 						<Spinner className="loading-spinner" animation="grow" role="status" variant="dark">
