@@ -34,6 +34,7 @@ export default function Sidebar() {
 	const [filter, setFilter] = useState('')
 	const [info, setInfo] = useState([])
 
+	/* Setting the default country list (recovered) */
 	useEffect(() => {
 		(async function loadDefaultData() {
 			const response = await api_recovered.get('/recovered');
@@ -46,6 +47,7 @@ export default function Sidebar() {
 		})()
 	}, [])
 
+	/* Load the countries data by the filter option */
 	async function handleFilter(e) {
 	  e.preventDefault();
 
@@ -67,6 +69,7 @@ export default function Sidebar() {
 	  }
 	}
 
+	/* return the correct title according to the filter option */
 	const getTitleFromFilter = filter_name => {
 		if (filter_name === 'confirmed'){
 			return 'total confirmed incidents'
@@ -80,6 +83,7 @@ export default function Sidebar() {
 		return 'total recovered incidents'
 	}
 
+	/* loading data main info according filter option */
 	const getDataFromFilter = (filter_name, item) => {
 
 		if (filter_name === 'confirmed'){
@@ -93,6 +97,7 @@ export default function Sidebar() {
 		}
 	}
 
+	/* collor of the main info by the filter choice */
 	const valueStyle = (filter_name) => {
 
 		if (filter_name === 'confirmed'){
