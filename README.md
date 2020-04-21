@@ -49,12 +49,11 @@
 - Clone o repositório
 - Instale as <a href="#bookmark_tabs-possíveis-dependências-e-frameworks">dependências</a> necessárias
 - Execute 'npm start' ou 'yarn start' no terminal
-<!-- - Ou clique no link abaixo se deseja apenas visualizar a aplicação :smile:
+- Ou clique no link abaixo se deseja apenas visualizar a aplicação :smile:
   
 :point_down:**Link da aplicação hospedada no Firebase** :point_down:
 
- [Weather App](https://weatherapp-559f6.firebaseapp.com/) -->
-
+ [Covid Tracker](https://covidtrackermadeus.firebaseapp.com/)
 
 <h1></h1>
 
