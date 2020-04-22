@@ -26,7 +26,6 @@
 ## :rocket: Tecnologias
 
 - [ReactJS](https://reactjs.org)
-- [React Bootstrap](https://react-bootstrap.github.io/)
 - [Axios](https://www.npmjs.com/package/axios)
 - [Context API](https://pt-br.reactjs.org/docs/context.html)
 - [Covid-19 API](https://github.com/mathdroid/covid-19-api)
