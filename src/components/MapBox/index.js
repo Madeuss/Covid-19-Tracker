@@ -43,7 +43,6 @@ fetch("https://coronavirus-tracker-api.herokuapp.com/v2/locations")
 			 new mapboxgl.Marker({
 				color: getColorFromConfirmedCount(latest.confirmed)
 			})
-			.togglePopup(true)
 			.setLngLat([ coordinates.longitude, coordinates.latitude ])
 			.addTo(map);
 		})
