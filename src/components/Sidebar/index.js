@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
+/** Jquery */
+import $ from 'jquery'
+
 /* Format the numbers with comma */
 import NumberFormat from 'react-number-format';
 
@@ -97,7 +100,7 @@ export default function Sidebar() {
 		}
 	}
 
-	/* collor of the main info by the filter choice */
+	/* collor of the title info by the filter choice */
 	const valueStyle = (filter_name) => {
 
 		if (filter_name === 'confirmed'){
@@ -110,7 +113,30 @@ export default function Sidebar() {
 			return {color: 'blueviolet'}
 		}
 
-	  }
+	}
+
+	/* collor of the main info by filter choice */
+	const getColorFromFilter = (filter_name, value) => {
+		if (filter_name === value && value === 'confirmed'){
+			return {color: 'rgba(252, 171, 44)'}
+		}
+		if (filter_name === value && value === 'deaths'){
+			return {color: 'rgb(228, 71, 71)'}
+		}
+		if (filter_name === value && value === 'recovered'){
+			return {color: 'blueviolet'}
+		}
+		return {color: 'white'}
+	}
+
+		/* Activating filter buttons */
+		$(document).ready(function(){
+			$('.button').on('click', function() {
+				$(this).siblings().removeClass('active')
+				$(this).addClass('active')
+			})
+		})
+
 
 	return (
 		<aside className="aside-data data-group" >
@@ -119,16 +145,16 @@ export default function Sidebar() {
 		
 				<Carousel indicators={false} keyboard={false} interval={12000} className="carousel">
 					<Carousel.Item>
-						<img className="d-block w-100" src={img1} alt="Third slide"/>
+						<img className="d-block w-100" src={img1} alt="First slide"/>
 					</Carousel.Item>
 					<Carousel.Item>
-						<img className="d-block w-100" src={img2} alt="Third slide"/>
+						<img className="d-block w-100" src={img2} alt="Second slide"/>
 					</Carousel.Item>
 					<Carousel.Item>
 						<img className="d-block w-100" src={img3} alt="Third slide"/>
 					</Carousel.Item>
 					<Carousel.Item>
-						<img className="d-block w-100" src={img4} alt="Third slide"/>
+						<img className="d-block w-100" src={img4} alt="Fourth slide"/>
 					</Carousel.Item>
 				</Carousel>
 			</section>
@@ -143,19 +169,19 @@ export default function Sidebar() {
 				{ data.confirmed? (
 				<div className="total-incidents-data" key={data.confirmed}>
 					<form className="button" onSubmit={handleFilter} >
-						<button className="btn-filter" id="btn-confirmed" type="submit" value="confirmed" onClick={e => setFilter(e.target.value)}>
+						<button className="btn-filter btn-confirmed" id="btn-confirmed" type="submit" value="confirmed" onClick={e => setFilter(e.target.value)}>
 							<NumberFormat value={data.confirmed.value} displayType={'text'} thousandSeparator={true} renderText={value => <>{value}</>} />
 							<br />Confirmed
 						</button>
 					</form>  
 					<form className="button" onSubmit={handleFilter} >
-						<button className="btn-filter" id="btn-deaths" idtype="submit" value="deaths" onClick={e => setFilter(e.target.value)}>
+						<button className="btn-filter btn-deaths" id="btn-deaths" idtype="submit" value="deaths" onClick={e => setFilter(e.target.value)}>
 							<NumberFormat value={data.deaths.value} displayType={'text'} thousandSeparator={true} renderText={value => <>{value}</>} />
 							<br />Deaths
 						</button>
 					</form>   
-					<form className="button" onSubmit={handleFilter} >
-						<button autoFocus className="btn-filter" id="btn-recov" type="submit" value="recovered" onClick={e => setFilter(e.target.value)}>
+					<form className="active button" onSubmit={handleFilter} >
+						<button autoFocus className="btn-filter btn-recov" id="btn-recov" type="submit" value="recovered" onClick={e => setFilter(e.target.value)}>
 							<NumberFormat value={data.recovered.value} displayType={'text'} thousandSeparator={true} renderText={value => <>{value}</>} />
 							<br />Recoveries
 						</button>
@@ -193,17 +219,17 @@ export default function Sidebar() {
 											<div className="dropdown-data">
 												<NumberFormat value={item.confirmed} displayType={'text'} thousandSeparator={true} 
 													renderText={value => 
-														<p>Confirmed: {value}</p> 
+														<p style={getColorFromFilter(filter, 'confirmed')}>Confirmed: {value}</p> 
 													} 
 												/>
 												<NumberFormat value={item.deaths} displayType={'text'} thousandSeparator={true} 
 													renderText={value => 
-														<p>Deaths: {value}</p> 
+														<p style={getColorFromFilter(filter, 'deaths')}>Deaths: {value}</p> 
 													} 
 												/>
 												<NumberFormat value={item.recovered} displayType={'text'} thousandSeparator={true} 
 													renderText={value => 
-														<p>Recoveries: {value}</p> 
+														<p style={getColorFromFilter(filter, 'recovered')}>Recoveries: {value}</p> 
 													} 
 												/>
 											</div>
@@ -247,7 +273,7 @@ export default function Sidebar() {
 													/>
 													<NumberFormat value={item.recovered} displayType={'text'} thousandSeparator={true} 
 														renderText={value => 
-															<p>Recoveries: {value}</p> 
+															<p style={{color: 'blueviolet'}}>Recoveries: {value}</p> 
 														} 
 													/>
 												</div>

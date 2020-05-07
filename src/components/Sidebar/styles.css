@@ -148,7 +148,9 @@
     border-right: 2px solid grey;
 }
 
- #btn-confirmed:hover,  #btn-confirmed:focus {
+ #btn-confirmed:hover, 
+ .total-incidents-data form:nth-child(1).active > 
+ .btn-filter {
     border-bottom: 2.5px solid rgba(252, 231, 44);
     color: rgb(252, 168, 44);
     background-color: rgb(211, 211, 211);
@@ -156,14 +158,18 @@
     transition: ease-in-out .3s;
 }
 
- #btn-deaths:hover, #btn-deaths:focus {
+ #btn-deaths:hover,
+ .total-incidents-data form:nth-child(2).active > 
+ .btn-filter {
     border-bottom: 2.5px solid rgb(228, 71, 71);
     color: rgb(228, 71, 71);
     background-color: rgb(211, 211, 211);
     transition: ease-in-out .3s;
 }
 
- #btn-recov:hover, #btn-recov:focus, #btn-recov:visited {
+ #btn-recov:hover,
+ .total-incidents-data form:nth-child(3).active > 
+ .btn-filter {
     border-bottom: 2.5px solid rgb(72, 84, 247);
     color: rgb(72, 84, 247);
     background-color: rgb(211, 211, 211);
@@ -176,7 +182,6 @@
     font-weight: 'bold';
     font-size: .5em;
 } 
-
 /* Incidents per country */
 .card-country {
     width: 100%;
@@ -250,6 +255,10 @@
 
 .country-incidents-data .dropdown-content p  {
     color: rgb(224, 224, 224);
+}
+
+.dropdown-data {
+    color: violet !important;
 }
 
 #angledown-icon {
