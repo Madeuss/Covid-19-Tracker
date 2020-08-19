@@ -52,7 +52,7 @@
   
 :point_down:**Link da aplicação hospedada no Firebase** :point_down:
 
- [Covid Tracker](https://covidtrackermadeus.firebaseapp.com/)
+ ## https://covidtrackermadeus.firebaseapp.com/
 
 <h1></h1>
 
