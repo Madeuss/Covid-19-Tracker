@@ -23,7 +23,7 @@
     <img alt="search demo gif" title="search_demo_gif" src=".github/search-demo.gif" height="300px" width="250px" />
 </h1>
 
-## :rocket: Tecnologias
+### :rocket: Tecnologias
 
 - [ReactJS](https://reactjs.org)
 - [Axios](https://www.npmjs.com/package/axios)
